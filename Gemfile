@@ -40,6 +40,8 @@ gem 'rmagick', '~> 2.15', '>= 2.15.2'
 gem 'barby'
 
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
