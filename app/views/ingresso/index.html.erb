@@ -1,15 +1,79 @@
 <div class="row" >
-   <div class="col-md-6 text-center" >
-     <h1><%= @ingressos.count() %></h1>
-   </div>
 
    <div class="col-md-6 text-center" >
-         <form>
            <div class="form-group ">
-             <input type="text" class="form-control input-lg" id="inputSuccess2Status" placeholder="Codigo" aria-describedby="inputSuccess2Status" maxlength="6" >
-
-             <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-
+             <input type="text" class="form-control input-lg" id="searchbox" placeholder="Codigo" aria-describedby="inputSuccess2Status" maxlength="6" >
            </div>
    </div>
 </div>
+<div class="row" >
+    <div class="col-md-3 text-center confirmado" id="confirmado">
+      <h2>Confirmado <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h2>
+    </div>
+    <div class="col-md-3 text-center rejeitado" id="rejeitado">
+      <h2>Rejeitado <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h2>
+    </div>
+</div>
+
+
+<script>
+var data;
+$.getJSON("/ingresso.json", function(json) {
+    data = json;
+});
+var lastCode=null;
+
+function update(ingresso){
+  $.ajax({
+    url: "/ingresso/"+ingresso.code,
+    type: 'PUT',
+    success: function() {
+        //alert('Object deleted!');
+    },
+    dataType: "json"
+  });
+}
+
+function aprovar(ingresso){
+  console.log("Aprovado");
+  $("#confirmado").css({opacity: "1"});
+  $("#confirmado").animate({opacity: "0"},1000,"swing");
+  ingresso.entrada = "pending";
+  lastCode = ingresso.code;
+  update(ingresso);
+}
+function rejeitar(ingresso){
+  console.log("Reprovado");
+  $("#rejeitado").css({opacity: "1"});
+  $("#rejeitado").animate({opacity: "0"},1000,"swing");
+}
+function search(code){
+  aprovado = false;
+  for (i = 0; i < data.length; i++) {
+      if(code == data[i].code){
+        aprovado=true;
+        break;
+      }
+  }
+  if(aprovado && ((data[i].entrada == null) || (data[i].code == lastCode)))
+    aprovar(data[i]);
+  else
+    rejeitar();
+  $("#searchbox").val("");
+}
+
+$("#searchbox").on('input', function() {
+    // do something
+    search_code = $("#searchbox").val();
+    if(search_code.length == 6){
+      search(search_code);
+    }
+});
+
+$(function() {
+  // Handler for .ready() called.
+  $('#confirmado').bind('webkitAnimationEnd', function(){
+    this.style.webkitAnimationName = '';
+  });
+});
+</script>

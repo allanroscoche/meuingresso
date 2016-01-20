@@ -11,7 +11,21 @@ body {
 .ingresso_form {
   margin-bottom: 30px;
 }
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
+.confirmado {
+  color: #328212;
+  border: 1px 1px 1px 1px;
+  border-style: dotted;
+  border-width: medium;
+  border-radius: 25px;
+  padding-bottom: 15px;
+  opacity: 0;
+}
+.rejeitado {
+  color: red;
+  border: 1px 1px 1px 1px;
+  border-style: dotted;
+  border-width: medium;
+  border-radius: 25px;
+  padding-bottom: 15px;
+  opacity: 0;
 }

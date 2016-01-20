@@ -5,6 +5,10 @@ class Ingresso < ActiveRecord::Base
 
   after_create :generate_token
 
+  def find_by_code(code)
+    @ingresso = Ingresso.where(code: code).take
+  end
+
   private
 
   def generate_token

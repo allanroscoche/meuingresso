@@ -6,6 +6,10 @@ class IngressoController < ApplicationController
 
   def index
     @ingressos = Ingresso.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @ingressos.to_json(:only=>[:code, :entrada]) }
+    end
   end
 
   def print
@@ -57,9 +61,14 @@ class IngressoController < ApplicationController
 
   end
 
-  def authorize
-    @ingresso = Ingresso.find(params[:id])
-    @ingresso.authorize
+  def update
+    @ingresso = Ingresso.find_by_code(params[:id])
+    @ingresso.entrada = DateTime.now
+    @ingresso.save
+    respond_to do |format|
+      format.html
+      format.json { render :json => @ingresso.to_json(:only=>[:code, :entrada]) }
+    end
   end
 
   private
