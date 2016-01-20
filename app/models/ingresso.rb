@@ -1,11 +1,19 @@
 class Ingresso < ActiveRecord::Base
   belongs_to :tipo
 
-  before_create :generateCode
   validates :tipo_id, presence: true
 
-  def generateCode
-    self.code = "1234"
+  after_create :generate_token
+
+  private
+
+  def generate_token
+    update_column :code, SecureRandom.hex(3).upcase
+  rescue ActiveRecord::RecordNotUnique => e
+    @token_attempts ||= 0
+    @token_attempts += 1
+    retry if @token_attempts < 3
+    raise e, "Retries exhausted"
   end
 
 end

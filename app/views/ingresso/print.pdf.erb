@@ -12,12 +12,12 @@
     <div id="content">
 <% i = 0 %>
 <% for ingresso in @ingressos %>
+  <% barcode = Barby::Code128B.new(ingresso.code) %>
   <div class="ingresso" >
-    <div class="texto">
-      <div class="id"><%= ingresso.id %> | <%= ingresso.tipo.nome %></div>
-      <div class="nome"></div>
-      <div class="date"><%= ingresso.created_at %></div>
-    </div>
+    <div class="date"><%= ingresso.created_at %></div>
+    <img class="codebar" width="400" class="figure" src="data:image/svg+xml;base64,<%= Base64.encode64(barcode.to_svg) %>"></img>
+    <div class="texto"><%= ingresso.tipo.nome %></div>
+    <div class="code"><%= ingresso.code %></div>
   </div>
   <% i += 1 %>
   <% if i >= 3 then %>

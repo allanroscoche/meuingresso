@@ -1,5 +1,4 @@
 .ingresso {
-  color:blue;
   background-image: asset-data-url('vep.png');
   background-repeat: no-repeat;
   width: 2000px;
@@ -12,17 +11,24 @@
 }
 .texto {
   color:red;
-  margin-left: 1100px;
-  margin-top: 500px;
-
+  margin-left: 1200px;
+  margin-top: 420px;
+  font-size: 600%;
 }
-.id {
-  margin-left: 125px;
-  font-size: 600%
+.code {
+  color:black;
+  margin-top: 40px;
+  margin-left: 1200px;
+  font-size: 600%;
+}
+.codebar {
+  margin-top: 450px;
+  float:right;
 }
 .date {
-  margin-top: 50px;
-  margin-left: 125px;
+  margin-top: 10px;
+  margin-left: 1125px;
   font-size: 300%;
+  color: black;
 }
 .page-break { display:block; clear:both; page-break-after:always; }
