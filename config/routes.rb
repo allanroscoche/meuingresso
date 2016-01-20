@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'ingresso#index'
 
-  resources :ingresso
+  resources :ingresso, :tipos
   get '/print/:tipo_id/:quantidade', :to => "ingresso#print"
 
   # Example of regular route:

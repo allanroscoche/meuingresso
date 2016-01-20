@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-6 text-center" >
+  <%= link_to "Novo Tipo de Ingresso", new_tipo_path, class:"btn btn-default" %>
+  <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 text-center" >
+    <table class="table table-striped">
+      <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+        <th>Descricao</th>
+        <th>Ação</th>
+      </tr>
+      <% for tipo in @tipos %>
+      <tr>
+        <td><%= tipo.nome %></td>
+        <td>R$<%= tipo.valor %></td>
+        <td><%= tipo.descricao %></td>
+        <td>
+          <%= link_to "Editar", edit_tipo_path(tipo), class:"btn btn-default" %>
+          <%= link_to 'Apagar', tipo, :confirm => 'Are you sure?', :method => :delete, class:"btn btn-default" %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+  <%= form_for @tipo do |f| %>
+     <%= f.label :nome %>
+     <%= f.text_field :nome, class: "form-control" %>
+
+     <%= f.label :valor %>
+     <%= f.number_field :valor, class: "form-control", step: "0.01" %>
+
+     <!--<%= f.label :descricao %>
+     <%= f.text_area :descricao, size: "60x12", class: "form-control" %> -->
+     <%= f.submit "Salvar", class:"btn btn-default" %>
+  <% end %>
