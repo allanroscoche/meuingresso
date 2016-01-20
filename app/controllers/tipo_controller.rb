@@ -1,0 +1,2 @@
+class TipoController < ApplicationController
+end

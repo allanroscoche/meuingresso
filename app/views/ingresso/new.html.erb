@@ -1,0 +1,31 @@
+<div class="row ingresso_form" >
+   <div class="col-md-6 text-center" >
+     <%= form_for @ingresso, url: {action: "create"}, html: {class: "form-inline"} do |f| %>
+        <%= f.label "Quantidade" %>
+        <%= number_field_tag "quantidade", 1, class:"form-control", id: "quantidade", max: "50" %>
+        <%= select_tag(:tipo_id, options_for_select( Tipo.all.map { |tipo| [tipo.nome+" - R$ "+tipo.valor.to_s, tipo.id] },{include_blank: false} ), class:"form-control") %>
+        <button type="button" class="btn btn-primary" onclick="print_ingresso();" >Gerar Ingressos</button>
+    <% end %>
+   </div>
+</div>
+<div class="row">
+  <div class="col-md-6 text-center" >
+    <table class="table table-striped">
+      <tr>
+        <th>Quantidade</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+      </tr>
+      <% for tipo in @resumo %>
+      <tr>
+        <td><%= tipo[1] %></td>
+        <td><%= tipo[0].nome %></td>
+        <td>R$<%= tipo[0].valor %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+  <div class="col-md-6 text-center">
+    <!--<button type="button" class="btn btn-primary">Editar Tipos de Ingresso</button> -->
+  </div>
+</div>

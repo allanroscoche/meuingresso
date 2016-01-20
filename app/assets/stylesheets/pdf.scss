@@ -1,0 +1,28 @@
+.ingresso {
+  color:blue;
+  background-image: asset-data-url('vep.png');
+  background-repeat: no-repeat;
+  width: 2000px;
+  height: 900px;
+  margin-bottom: 10px;
+  border: 5px 5px 5px 5px;
+  border-width: 15px;
+  border-style: solid;
+  border-color: black;
+}
+.texto {
+  color:red;
+  margin-left: 1100px;
+  margin-top: 500px;
+
+}
+.id {
+  margin-left: 125px;
+  font-size: 600%
+}
+.date {
+  margin-top: 50px;
+  margin-left: 125px;
+  font-size: 300%;
+}
+.page-break { display:block; clear:both; page-break-after:always; }

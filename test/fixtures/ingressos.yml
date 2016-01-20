@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  entrada: 2016-01-18 21:07:36
+
+two:
+  code: MyString
+  entrada: 2016-01-18 21:07:36
