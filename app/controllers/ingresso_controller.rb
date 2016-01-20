@@ -20,7 +20,7 @@ class IngressoController < ApplicationController
 
     render :pdf => "ingressos",
              :template => '/ingresso/print.pdf.erb',
-             #:show_as_html => true,
+             :show_as_html => true,
              :page_size  => "A4",
              :dpi => '300',
              #:save_to_file => Rails.root.join('pdfs', "teste.pdf"),
