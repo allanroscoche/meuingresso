@@ -14,7 +14,9 @@ class TiposController < ApplicationController
 
   def destroy
     @tipo = Tipo.find(params[:id])
-    @tipo.destroy
+    if Ingresso.where(tipo_id: @tipo.id).blank?
+      @tipo.destroy
+    end
     redirect_to action: "index"
   end
 
