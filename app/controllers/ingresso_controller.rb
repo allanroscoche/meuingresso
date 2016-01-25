@@ -1,6 +1,8 @@
 require 'barby'
 require 'barby/barcode/code_128'
 require 'barby/outputter/svg_outputter'
+require 'rmagick'
+include Magick
 
 class IngressoController < ApplicationController
 
@@ -14,6 +16,7 @@ class IngressoController < ApplicationController
 
   def print
     quantidade = params[:quantidade].to_i
+    @image =  Base64.strict_encode64(IO.binread(Rails.root.join('app','assets','images','vep.png')))
     @ingressos = []
     if Tipo.exists?(params[:tipo_id]) and quantidade < 50
       quantidade.times do |i|
