@@ -13,6 +13,10 @@
     <div class="col-md-3 text-center rejeitado" id="rejeitado">
       <h2>Rejeitado <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></h2>
     </div>
+    <div class="col-md-6 text-left">
+       <p id="code_log">
+       </p>
+    </div>
 </div>
 
 
@@ -33,19 +37,29 @@ function update(ingresso){
     dataType: "json"
   });
 }
+function log(code, texto){
+  novo_texto = "<b>"+code+"</b> "+texto + "<br>" + $("#code_log").html();
+  $("#code_log").html(novo_texto);
+}
+function reset(){
+  $("#confirmado").css({opacity: "0"});
+  $("#rejeitado").css({opacity: "0"});
+}
 
 function aprovar(ingresso){
+  reset();
   console.log("Aprovado");
   $("#confirmado").css({opacity: "1"});
-  $("#confirmado").animate({opacity: "0"},1000,"swing");
+  //$("#confirmado").animate({opacity: "0.5"},1000,"swing");
   ingresso.entrada = "pending";
-  lastCode = ingresso.code;
+  //lastCode = ingresso.code;
   update(ingresso);
 }
-function rejeitar(ingresso){
+function rejeitar(){
+  reset();
   console.log("Reprovado");
   $("#rejeitado").css({opacity: "1"});
-  $("#rejeitado").animate({opacity: "0"},1000,"swing");
+  //$("#rejeitado").animate({opacity: "0.5"},1000,"swing");
 }
 function search(code){
   aprovado = false;
@@ -55,10 +69,20 @@ function search(code){
         break;
       }
   }
-  if(aprovado && ((data[i].entrada == null) || (data[i].code == lastCode)))
-    aprovar(data[i]);
-  else
+  if (aprovado){
+    if(data[i].entrada == null){
+      aprovar(data[i]);
+      log(code, " foi aprovado.")
+    }
+    else {
+      rejeitar();
+      log(code, " já foi registrado.")
+    }
+  }
+  else{
     rejeitar();
+    log(code, " é inválido.")
+  }
   $("#searchbox").val("");
 }
 
@@ -67,6 +91,9 @@ $("#searchbox").on('input', function() {
     search_code = $("#searchbox").val();
     if(search_code.length == 6){
       search(search_code);
+    }
+    else {
+      reset();
     }
 });
 
