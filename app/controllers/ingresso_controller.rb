@@ -30,6 +30,9 @@ class IngressoController < ApplicationController
              #:show_as_html => true,
              :page_size  => "A4",
              :dpi => '300',
+             :margin => {
+               :top => '2'
+             },
              #:save_to_file => Rails.root.join('pdfs', "teste.pdf"),
              #:save_only => true,
              :layout => 'pdf'

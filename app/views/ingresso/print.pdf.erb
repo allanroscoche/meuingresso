@@ -11,42 +11,46 @@
 .ingresso {
   background-image: url("data:image/png;base64,<%= @image %>");
   background-repeat: no-repeat;
-  width: 2000px;
-  height: 900px;
-  margin-bottom: 10px;
-  border: 5px 5px 5px 5px;
-  border-width: 15px;
-  border-style: solid;
+  width: 12cm;
+  height: 5.0cm;
+  margin: 0;
+  margin-bottom: 0.4cm;
+  /*border: 0.1cm 1cm 1cm 1cm; */
+  border-width: 0.1cm;
+  border-style: dotted;
   border-color: black;
 }
 
 /* line 12, /home/allan/Projetos/baile/meuingresso/app/assets/stylesheets/pdf.scss */
 .texto {
   color: red;
-  margin-left: 1200px;
-  margin-top: 420px;
-  font-size: 600%;
+  margin-left: 5.8cm;
+  margin-top: 1.3cm;
+  font-size: 180%;
 }
 
 /* line 18, /home/allan/Projetos/baile/meuingresso/app/assets/stylesheets/pdf.scss */
 .code {
+  font-weight: bold;
   color: black;
-  margin-top: 40px;
-  margin-left: 1200px;
-  font-size: 600%;
+  margin-top: 0.1cm;
+  margin-left: 5.8cm;
+  font-size: 200%;
 }
 
 /* line 24, /home/allan/Projetos/baile/meuingresso/app/assets/stylesheets/pdf.scss */
 .codebar {
-  margin-top: 450px;
-  float: right;
+  margin-top: 1cm;
+  margin-left: 2.7cm;
+  height: 2.8cm;
+  float: left;
 }
 
 /* line 28, /home/allan/Projetos/baile/meuingresso/app/assets/stylesheets/pdf.scss */
 .date {
-  margin-top: 10px;
-  margin-left: 1125px;
-  font-size: 300%;
+  margin-top: 1.3cm;
+  font-size: 50%;
+  float: right;
   color: black;
 }
 
@@ -66,13 +70,13 @@
 <% for ingresso in @ingressos %>
   <% barcode = Barby::Code128B.new(ingresso.code) %>
   <div class="ingresso" >
-    <div class="date"><%= ingresso.created_at %></div>
-    <img class="codebar" width="400" class="figure" src="data:image/svg+xml;base64,<%= Base64.encode64(barcode.to_svg) %>"></img>
+    <img class="codebar" class="figure" src="data:image/svg+xml;base64,<%= Base64.encode64(barcode.to_svg) %>"></img>
     <div class="texto"><%= ingresso.tipo.nome %></div>
     <div class="code"><%= ingresso.code %></div>
+    <div class="date"><%= ingresso.created_at %></div>
   </div>
   <% i += 1 %>
-  <% if i >= 3 then %>
+  <% if i >= 5 then %>
     <div class="page-break"></div>
     <% i=0 %>
   <% end %>
